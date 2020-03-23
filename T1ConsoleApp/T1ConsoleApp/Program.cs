@@ -1,6 +1,6 @@
 ﻿using System;
 
-// Program ideas
+// Program ideas - hi
 // 1. Calculator // https://docs.microsoft.com/en-us/visualstudio/get-started/csharp/tutorial-console?view=vs-2019
     // TODO - seperate into functions/ sperate files?
 // 2. Another app??? - try out Visual C# - https://www.homeandlearn.co.uk/csharp/csharp_s1p8.html
