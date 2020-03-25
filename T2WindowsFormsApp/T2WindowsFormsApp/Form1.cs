@@ -26,7 +26,7 @@ namespace T2WindowsFormsApp
             
         }
 
-
+        string input;
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -34,6 +34,8 @@ namespace T2WindowsFormsApp
 
         private void btn1_Click(object sender, EventArgs e)
         {
+            textBox1.Text += "1";
+            //input = textBox1.Text;
             //string input;
             //input = textBox1.Text;
             //MessageBox.Show(input);
@@ -92,7 +94,7 @@ namespace T2WindowsFormsApp
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-
+            textBox1.Text = "";
         }
 
         private void btnEquals_Click(object sender, EventArgs e)
