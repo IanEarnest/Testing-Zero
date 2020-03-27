@@ -108,34 +108,35 @@ namespace T2WindowsFormsApp
         }
 
 
-        double num1 = 0;
-        double num2 = 0;
+        double num1 = 0; // add num
+        double num2 = 0; // answer?
         private void btnEquals_Click(object sender, EventArgs e)
         {
-            answerBox.Text = "";
-            /*
-             * num2 = num1 + double.Parse( txtDisplay.Text );
-                txtDisplay.Text = num2.ToString( );
-                num1 = 0;
-             */
+            num2 = num1 + double.Parse(answerBox.Text);
+            answerBox.Text = num2.ToString(); // show answer
+            //answerBox.Text = "";
+            num1 = 0;
+            fullCalculationsBox.Text += num1 + " + " + answerBox.Text + " = " + num2 + "\n";
         }
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
-            String tmpAnswer = answerBox.Text;
+
+            // get box number (double)
+            // add to second number (if any)
+            // 
+            //String tmpAnswer = answerBox.Text;
             double tmpNum1 = double.Parse(answerBox.Text);
+            double tmpAnswer = num1 + tmpNum1;
+            fullCalculationsBox.Text += num1 + " + " + tmpNum1 + " = " + tmpAnswer + "\n";
+
+
             //tmpNum1
-            num2 += tmpNum1;
-            calculationBox.Text += tmpAnswer + "+";
-            fullCalculationsBox.Text += tmpAnswer + "+";
-            answerBox.Text = "";
-            /*
-             * double tmpNum1 = double.Parse( txtDisplay.Text );
-                note += tmpNum1 
-                note += "+"
-                total1 += tmpNum1 
-                txtDisplay.Clear();
-             */
+            num1 += tmpNum1;
+            calculationBox.Text += tmpNum1 + "+";
+            
+            
+            answerBox.Text = ""; // if + pressed second time, show answer until something pressed?
         }
 
         private void btnMinus_Click(object sender, EventArgs e)

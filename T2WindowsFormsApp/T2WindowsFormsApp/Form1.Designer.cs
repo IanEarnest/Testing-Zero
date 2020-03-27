@@ -275,7 +275,7 @@
             // 
             this.fullCalculationsBox.Location = new System.Drawing.Point(268, 60);
             this.fullCalculationsBox.Name = "fullCalculationsBox";
-            this.fullCalculationsBox.Size = new System.Drawing.Size(100, 56);
+            this.fullCalculationsBox.Size = new System.Drawing.Size(382, 285);
             this.fullCalculationsBox.TabIndex = 24;
             this.fullCalculationsBox.Text = "";
             // 
