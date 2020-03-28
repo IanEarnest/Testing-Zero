@@ -28,7 +28,7 @@ namespace T2WindowsFormsApp
         //string input;
         private void btn1_Click(object sender, EventArgs e)
         {
-            answerBox.Text += "1";
+            inputBox.Text += "1";
             //input = textBox1.Text;
             //string input;
             //input = textBox1.Text;
@@ -38,85 +38,91 @@ namespace T2WindowsFormsApp
 
         private void btn2_Click(object sender, EventArgs e)
         {
-            answerBox.Text += "2";
+            inputBox.Text += "2";
         }
 
         private void btn3_Click(object sender, EventArgs e)
         {
-            answerBox.Text += "3";
+            inputBox.Text += "3";
         }
 
         private void btn4_Click(object sender, EventArgs e)
         {
-            answerBox.Text += "4";
+            inputBox.Text += "4";
         }
 
         private void btn5_Click(object sender, EventArgs e)
         {
-            answerBox.Text += "5";
+            inputBox.Text += "5";
         }
 
         private void btn6_Click(object sender, EventArgs e)
         {
-            answerBox.Text += "6";
+            inputBox.Text += "6";
         }
 
         private void btn7_Click(object sender, EventArgs e)
         {
-            answerBox.Text += "7";
+            inputBox.Text += "7";
         }
 
         private void btn8_Click(object sender, EventArgs e)
         {
-            answerBox.Text += "8";
+            inputBox.Text += "8";
         }
 
         private void btn9_Click(object sender, EventArgs e)
         {
-            answerBox.Text += "9";
+            inputBox.Text += "9";
         }
 
         private void btn0_Click(object sender, EventArgs e)
         {
-            answerBox.Text += "0";
+            inputBox.Text += "0";
         }
 
         private void btnDOT_Click(object sender, EventArgs e)
         {
-            answerBox.Text += ".";
+            inputBox.Text += ".";
         }
 
         private void btnBackspace_Click(object sender, EventArgs e)
         {
-            String tmpAnswer = answerBox.Text;
+            String tmpAnswer = inputBox.Text;
             String newAnswerBox = "";
             //answerBox.Text.Length = answerBox.Text.Length - 1;
             // Only remove last letter if the letter exists (otherwise would have error)
             if (tmpAnswer.Length > 0) { 
                 newAnswerBox = tmpAnswer.Substring(0, (tmpAnswer.Length - 1));
             }
-            answerBox.Text = newAnswerBox;
+            inputBox.Text = newAnswerBox;
         }
         private void btnClearEntry_Click(object sender, EventArgs e)
         {
-            answerBox.Text = ""; //textBox1.Clear();
+            inputBox.Text = ""; //textBox1.Clear();
         }
         private void btnClear_Click(object sender, EventArgs e)
         {
-            answerBox.Text = "";
+            inputBox.Text = "";
             calculationBox.Text = "";
         }
 
 
         double num1 = 0; // add num
         double num2 = 0; // answer?
+        double answer = 0; // answer?
         private void btnEquals_Click(object sender, EventArgs e)
         {
-            num2 = num1 + double.Parse(answerBox.Text);
-            answerBox.Text = num2.ToString(); // show answer
-            //answerBox.Text = "";
+            num2 = num1 + double.Parse(inputBox.Text);
+
+            inputBox.Text = num2.ToString(); // show answer
+            
             num1 = 0;
-            fullCalculationsBox.Text += num1 + " + " + answerBox.Text + " = " + num2 + "\n";
+            
+            fullCalculationsBox.Text += num1 + " + " + inputBox.Text + " = " + num2 + "\n";
+            calculationBox.Text += inputBox.Text; //"("+num2+")";
+            inputBox.Text = num2.ToString(); //answer in box
+            //next number clears box
         }
 
         private void btnPlus_Click(object sender, EventArgs e)
@@ -126,7 +132,7 @@ namespace T2WindowsFormsApp
             // add to second number (if any)
             // 
             //String tmpAnswer = answerBox.Text;
-            double tmpNum1 = double.Parse(answerBox.Text);
+            double tmpNum1 = double.Parse(inputBox.Text);
             double tmpAnswer = num1 + tmpNum1;
             fullCalculationsBox.Text += num1 + " + " + tmpNum1 + " = " + tmpAnswer + "\n";
 
@@ -136,7 +142,7 @@ namespace T2WindowsFormsApp
             calculationBox.Text += tmpNum1 + "+";
             
             
-            answerBox.Text = ""; // if + pressed second time, show answer until something pressed?
+            inputBox.Text = ""; // if + pressed second time, show answer until something pressed?
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
@@ -156,12 +162,14 @@ namespace T2WindowsFormsApp
 
         private void btnInvert_Click(object sender, EventArgs e)
         {
+            double tmpNum =  double.Parse(inputBox.Text);
+            tmpNum = tmpNum * -1;
+            inputBox.Text = tmpNum.ToString();
             // number = minus (true)?
         }
 
         private void btnExtend_Click(object sender, EventArgs e)
         {
-            answerBox.Text = ""+fullCalculationsBox.Height;
             fullCalculationsBox.Height = 232; //285
             //button18.Visible = false; //shrink
             //button19.Visible = true;
