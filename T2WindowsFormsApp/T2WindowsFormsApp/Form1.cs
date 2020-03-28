@@ -161,6 +161,10 @@ namespace T2WindowsFormsApp
 
         private void btnExtend_Click(object sender, EventArgs e)
         {
+            answerBox.Text = ""+fullCalculationsBox.Height;
+            fullCalculationsBox.Height = 232; //285
+            //button18.Visible = false; //shrink
+            //button19.Visible = true;
             // fullcalculationsbox size = 100, 311
             // hide btnShrink
             // show btnExtend
@@ -168,6 +172,9 @@ namespace T2WindowsFormsApp
 
         private void btnShrink_Click(object sender, EventArgs e)
         {
+            fullCalculationsBox.Height = 56;
+            //button18.Visible = true; //shrink
+            //button19.Visible = false;
             // fullcalculationsbox size = 100, 56
             // hide btnShrink
             // show btnExtend
