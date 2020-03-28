@@ -91,7 +91,7 @@ namespace T2WindowsFormsApp
             inputBox.Text += "0";
         }
 
-        private void btnDOT_Click(object sender, EventArgs e)
+        private void btnPoint_Click(object sender, EventArgs e)
         {
             inputBox.Text += ".";
         }
@@ -127,6 +127,7 @@ namespace T2WindowsFormsApp
         double numFirst = 0; // 
         double numSecond = 0; // 
         double answer = 0; // answer?
+        string lastPressed = "";
         private void btnEquals_Click(object sender, EventArgs e)
         {
             //num2 = num1 + double.Parse(inputBox.Text);
@@ -139,7 +140,7 @@ namespace T2WindowsFormsApp
             // if used add together, get input, set as second number
             // else get input, set as second number
             // add both numbers
-
+            /*
             if (numSecond == 0)
             {
                 numSecond = double.Parse(inputBox.Text);
@@ -152,6 +153,8 @@ namespace T2WindowsFormsApp
                 calculationBox.Text += numSecond + "+";
             }
             answer = numFirst + numSecond;
+            */
+            preCalc("+");
             fullCalculationsBox.Text += numFirst + " + " + numSecond + " = " + answer + "\n";
             calculationBox.Text += numSecond.ToString(); //"("+num2+")";
             inputBox.Text = answer.ToString(); //answer in box
@@ -168,40 +171,44 @@ namespace T2WindowsFormsApp
             //                          + pressed again does nothing
         }
 
-        private void btnPlus_Click(object sender, EventArgs e)
+        private void preCalc(string calcOperator)
         {
-
-            // get box number (double)
-            // add to second number (if any)
-            // 
-            //String tmpAnswer = answerBox.Text;
-            if(numFirst == 0) // if first input, set num1
-            { 
+            if (numFirst == 0) // if first input, set num1
+            {
                 numFirst = double.Parse(inputBox.Text);
-                calculationBox.Text += numFirst + "+";
-            } 
-            else if(numSecond == 0)
+                calculationBox.Text += numFirst + calcOperator;
+            }
+            else if (numSecond == 0)
             {
                 numSecond = double.Parse(inputBox.Text);
-                calculationBox.Text += numSecond + "+";
+                calculationBox.Text += numSecond + calcOperator;
             }
             else // if both first and second numbers set
             {
-                numFirst = numFirst + numSecond;
+                if (calcOperator == "+") numFirst = numFirst + numSecond;
+                if (calcOperator == "-") numFirst = numFirst - numSecond;
+                if (calcOperator == "/") numFirst = numFirst / numSecond;
+                if (calcOperator == "*") numFirst = numFirst * numSecond;
                 //numFirst = 0;
                 numSecond = double.Parse(inputBox.Text);
-                calculationBox.Text += numSecond + "+";
+                calculationBox.Text += numSecond + calcOperator;
             }
-            answer = numFirst + numSecond;
-            //double tmpNum1 = double.Parse(inputBox.Text);
-            //double tmpAnswer = num1 + tmpNum1;
 
+            if (calcOperator == "+") answer = numFirst + numSecond;
+            if (calcOperator == "-") answer = numFirst - numSecond;
+            if (calcOperator == "/") answer = numFirst / numSecond;
+            if (calcOperator == "*") answer = numFirst * numSecond;
+        }
+
+        // get box number (double)
+        // add to second number (if any)
+        // 
+        //String tmpAnswer = answerBox.Text;
+        private void btnPlus_Click(object sender, EventArgs e)
+        {
+            lastPressed = "+";
+            preCalc("+");
             fullCalculationsBox.Text += numFirst + " + " + numSecond + " = " + answer + "\n";
-
-            //num1 += tmpNum1;
-            //calculationBox.Text += tmpNum1 + "+";
-            
-            
             inputBox.Text = ""; 
             // if + pressed (second time?), show answer until something pressed?
             //inputBox.Text = answer.ToString();
