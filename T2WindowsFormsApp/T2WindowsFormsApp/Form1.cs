@@ -154,9 +154,8 @@ namespace T2WindowsFormsApp
             }
             answer = numFirst + numSecond;
             */
-            preCalc("+");
-            fullCalculationsBox.Text += numFirst + " + " + numSecond + " = " + answer + "\n";
-            calculationBox.Text += numSecond.ToString(); //"("+num2+")";
+            preCalc(lastPressed);
+            //calculationBox.Text += numSecond.ToString(); //"("+num2+")";
             inputBox.Text = answer.ToString(); //answer in box
             //next number clears box
             //numFirst = 0;
@@ -173,6 +172,10 @@ namespace T2WindowsFormsApp
 
         private void preCalc(string calcOperator)
         {
+            // if + pressed (second time?), show answer until something pressed?
+            //inputBox.Text = answer.ToString();
+            //tmpAnswerInInput = true
+
             if (numFirst == 0) // if first input, set num1
             {
                 numFirst = double.Parse(inputBox.Text);
@@ -194,10 +197,19 @@ namespace T2WindowsFormsApp
                 calculationBox.Text += numSecond + calcOperator;
             }
 
-            if (calcOperator == "+") answer = numFirst + numSecond;
+
+            string calcOperatorSpace = " " + calcOperator + " "; // this means " + "
+            if (calcOperator == "+")
+            {
+                answer = numFirst + numSecond;
+            }
             if (calcOperator == "-") answer = numFirst - numSecond;
             if (calcOperator == "/") answer = numFirst / numSecond;
             if (calcOperator == "*") answer = numFirst * numSecond;
+
+            lastPressed = calcOperator;
+            fullCalculationsBox.Text += numFirst + calcOperatorSpace + numSecond + " = " + answer + "\n";
+            inputBox.Text = "";
         }
 
         // get box number (double)
@@ -206,28 +218,22 @@ namespace T2WindowsFormsApp
         //String tmpAnswer = answerBox.Text;
         private void btnPlus_Click(object sender, EventArgs e)
         {
-            lastPressed = "+";
             preCalc("+");
-            fullCalculationsBox.Text += numFirst + " + " + numSecond + " = " + answer + "\n";
-            inputBox.Text = ""; 
-            // if + pressed (second time?), show answer until something pressed?
-            //inputBox.Text = answer.ToString();
-            //tmpAnswerInInput = true
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
         {
-            //?
+            preCalc("-");
         }
 
         private void btnMultiply_Click(object sender, EventArgs e)
         {
-            //?
+            preCalc("*");
         }
 
         private void btnDivide_Click(object sender, EventArgs e)
         {
-            //?
+            preCalc("/");
         }
 
         private void btnInvert_Click(object sender, EventArgs e)
@@ -251,11 +257,6 @@ namespace T2WindowsFormsApp
         private void btnShrink_Click(object sender, EventArgs e)
         {
             fullCalculationsBox.Height = 56;
-            //button18.Visible = true; //shrink
-            //button19.Visible = false;
-            // fullcalculationsbox size = 100, 56
-            // hide btnShrink
-            // show btnExtend
         }
     }
 }
