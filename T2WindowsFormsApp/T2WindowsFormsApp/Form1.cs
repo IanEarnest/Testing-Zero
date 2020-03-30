@@ -18,27 +18,33 @@ namespace T2WindowsFormsApp
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            // shrink hide
+            //input = textBox1.Text;
+            //string input;
+            //input = textBox1.Text;
+            //MessageBox.Show(input);
+            //MessageBox.Show("Hi", "Title", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
         }
 
         // This was made following the tutorial:
         // Calc https://www.homeandlearn.co.uk/csharp/csharp_s2p18.html
         //TODO
         // Menus? https://www.homeandlearn.co.uk/csharp/csharp_s4p1.html
-        // After = press number to reset
-        //string input;
+        // 
+        //Future
+        // btnPoint_Click add check for number before
+
 
 
         // variables
         double numFirst = 0; // first input
         double numSecond = 0; // last input 
         double answer = 0; // answer
-        string lastPressed = ""; // operator
+        string calcOperator = ""; // operator
+        string calcOperatorSpace = "";
+        bool equalsPressed = false;
+        bool tmpAnswerInInput = false;
 
-        // answer in box
-
-        //next number clears box
-        //numFirst = 0;
+        // if + pressed (second time?), show answer until something pressed?
         // after equals, if a number is pressed, reset everything
         // after equals, if equals pressed, repeats last action (+)
         //                          answer += numSecond;
@@ -49,62 +55,188 @@ namespace T2WindowsFormsApp
         //                          calculationBox.Text = answer.toString() + " + "
         //                          + pressed again does nothing
 
-        // Most logic in here
-        private void preCalc(string calcOperator)
+        // Most logic in here   
+        private void preCalc(string calcOp)
         {
-            // if + pressed (second time?), show answer until something pressed?
-            //inputBox.Text = answer.ToString();
-            //tmpAnswerInInput = true
+            calcOperator = calcOp;
+            calcOperatorSpace = " " + calcOp + " "; // this means " + "
+
+            // (stop + being repeat pressed) number pressed, plus pressed (no repeat)
+            //if(lastPressed != "+")
+
+            // When operator is pressed or equals
+            // first input store in numFirst
+            // second input store in numSecond
+            // 
+            // on second + display temp
 
             if (numFirst == 0) // if first input, set num1
             {
                 numFirst = double.Parse(inputBox.Text);
-                calculationBox.Text += numFirst + calcOperator;
+                calculationBox.Text += numFirst + calcOp; // e.g. 1 +
             }
-            else if (numSecond == 0)
+            else if (numSecond == 0) // if second input, set num2
             {
-                numSecond = double.Parse(inputBox.Text);
-                calculationBox.Text += numSecond + calcOperator;
+                // e.g. 1 + 1 
+                if (!equalsPressed)
+                {
+                    numSecond = double.Parse(inputBox.Text);
+                    calculationBox.Text += numSecond + calcOp; // e.g. 1 + 1
+                                                               // on second + pressed, display temp answer
+                                                               // same for =??
+                    calculate(); // e.g. answer = numFirst + numSecond;
+
+                    inputBox.Text = answer.ToString();
+                    tmpAnswerInInput = true;
+                    fullCalculationsBox.Text += numSecond + calcOp;
+                    // carry on calculating?
+                }
+                else // e.g. 1 + 1 =
+                {
+                    numSecond = double.Parse(inputBox.Text);
+                    calculate(); // e.g. answer = numFirst + numSecond;
+
+                    calculationBox.Text = numFirst + calcOperatorSpace + numSecond + " =";
+                    fullCalculationsBox.Text += numFirst + calcOperatorSpace + numSecond + " = " + answer + "\n";
+
+                    inputBox.Text = answer.ToString();
+                    tmpAnswerInInput = true;
+                }
+            }
+            // repeated =
+            else if (equalsPressed) // if equals pressed set end to "=" otherwise set end to operation
+            {
+                // check operator
+                /*
+                double tmpNumFirst = answer;
+                if (calcOperator == "+") answer = tmpNumFirst + numSecond;
+                if (calcOperator == "-") answer = tmpNumFirst - numSecond;
+                if (calcOperator == "/") answer = tmpNumFirst / numSecond;
+                if (calcOperator == "*") answer = tmpNumFirst * numSecond;
+                */
+                numFirst = answer;
+                calculate();
+                // 1 + 2 + 3 = 6 changed into
+                // 3 + 3
+
+                calculationBox.Text = numFirst + calcOperatorSpace + numSecond + " =";
+                fullCalculationsBox.Text += numFirst + calcOperatorSpace + numSecond + " = " + answer + "\n";
+
+                inputBox.Text = answer.ToString(); // temp
+
+
+                // DONE? after this any new number resets everything
+                // after this, press + (operator) to sets numbers available and changes
+                //calculationBox to answer + operator
+                // 3+3 "no spaces" at some point??
+
+
+
+
+
+
+
+
+
+
+
+
+
+                //fullCalculationsBox.Text += tmpNumFirst + calcOperatorSpace + numSecond + " = " + answer + "\n";
+                //calculationBox.Text = tmpNumFirst.ToString() + calcOperatorSpace + numSecond.ToString() + " =";
+                //inputBox.Text = answer.ToString(); // temp
+                //fullCalculationsBox.Text += calculationBox.Text + answer + "\n";
+
+                // after equals pressed, start again
+                //reset();
+                //equalsPressed = false;
+                //answer += numSecond;
+                //answer = numFirst;
+                // after this, if + pressed, do nothing 
+                // when is equalsPressed = false?
             }
             else // if both first and second numbers set
             {
-                if (calcOperator == "+") numFirst = numFirst + numSecond;
-                if (calcOperator == "-") numFirst = numFirst - numSecond;
-                if (calcOperator == "/") numFirst = numFirst / numSecond;
-                if (calcOperator == "*") numFirst = numFirst * numSecond;
-                //numFirst = 0;
-                numSecond = double.Parse(inputBox.Text);
-                calculationBox.Text += numSecond + calcOperator;
+                // if + pressed when answer = numFirst + numSecond;
+                // then don't calculate again
+
+                // 1+1 +2????
+                // plus/ operator or equals pressed?
+
+
+                // set first number to a pre calculation of the two numbers
+                // set numSecond to input
+
+                //fullCalculationsBox.Text = "1. " + numFirst + ", " + numSecond + ", " + tmp + ", " + answer;
+
+                // if operation not repeated on same numbers (what if user presses same number again?)
+                // and user has pressed a number
+                //answer != (numFirst + numSecond) &&
+                if (tmpAnswerInInput == false)
+                {
+                    //fullCalculationsBox.Text = "2. " + numFirst + ", " + numSecond + ", " + answer;
+
+                    // keep calculating
+                    // set first number to a pre calculation of the two numbers
+                    // set numSecond to input
+                    if (calcOp == "+") numFirst = numFirst + numSecond;
+                    if (calcOp == "-") numFirst = numFirst - numSecond;
+                    if (calcOp == "/") numFirst = numFirst / numSecond;
+                    if (calcOp == "*") numFirst = numFirst * numSecond;
+                    numSecond = double.Parse(inputBox.Text);
+                    calculate();
+
+                    
+                    inputBox.Text = answer.ToString();
+                    tmpAnswerInInput = true;
+                    calculationBox.Text += numSecond + calcOp;
+                    fullCalculationsBox.Text += numSecond + calcOp;
+
+                    
+                }
             }
 
+            //equals
+            // after every input, delete last input
+            tmpAnswerInInput = true;
+        }
 
-            string calcOperatorSpace = " " + calcOperator + " "; // this means " + "
-            if (calcOperator == "+")
+        // checked on every number, if answer is visible, delete
+        private void tmpAnswerCheck()
+        {
+            if(tmpAnswerInInput)
             {
-                answer = numFirst + numSecond;
+              inputBox.Text = "";
+              //calculationBox.Text = "";
+              tmpAnswerInInput = false;
+
+                // after digit is pressed after equals has been pressed
+                if (equalsPressed)
+                {
+                    // not running??
+                    reset();
+                }
             }
+        }
+
+        private void reset()
+        {
+            numFirst = 0;
+            numSecond = 0;
+            answer = 0;
+            inputBox.Text = "";
+            calculationBox.Text = "";
+            equalsPressed = false;
+        }
+
+        private void calculate()
+        {
+            // calculate answer
+            if (calcOperator == "+") answer = numFirst + numSecond;
             if (calcOperator == "-") answer = numFirst - numSecond;
             if (calcOperator == "/") answer = numFirst / numSecond;
             if (calcOperator == "*") answer = numFirst * numSecond;
-
-            lastPressed = calcOperator;
-            fullCalculationsBox.Text += numFirst + calcOperatorSpace + numSecond + " = " + answer + "\n";
-            inputBox.Text = "";
         }
-
-
-        private void tmpAnswerCheck()
-        {
-            //if(tmpAnswerInInput)
-            //{
-            // inputBox.Text = "";
-            // tmpAnswerInInput = false;
-            //}
-        }
-
-
-
-
 
 
 
@@ -140,72 +272,111 @@ namespace T2WindowsFormsApp
         // buttons 1-9
         private void btn1_Click(object sender, EventArgs e)
         {
-            //tmpAnswerCheck()
+            tmpAnswerCheck();
             inputBox.Text += "1";
-            //input = textBox1.Text;
-            //string input;
-            //input = textBox1.Text;
-            //MessageBox.Show(input);
-            //MessageBox.Show("Hi", "Title", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
         }
 
         // buttons
         private void btn2_Click(object sender, EventArgs e)
         {
+            tmpAnswerCheck();
             inputBox.Text += "2";
         }
 
         private void btn3_Click(object sender, EventArgs e)
         {
+            tmpAnswerCheck();
             inputBox.Text += "3";
         }
 
         private void btn4_Click(object sender, EventArgs e)
         {
+            tmpAnswerCheck();
             inputBox.Text += "4";
         }
 
         private void btn5_Click(object sender, EventArgs e)
         {
+            tmpAnswerCheck();
             inputBox.Text += "5";
         }
 
         private void btn6_Click(object sender, EventArgs e)
         {
+            tmpAnswerCheck();
             inputBox.Text += "6";
         }
 
         private void btn7_Click(object sender, EventArgs e)
         {
+            tmpAnswerCheck();
             inputBox.Text += "7";
         }
 
         private void btn8_Click(object sender, EventArgs e)
         {
+            tmpAnswerCheck();
             inputBox.Text += "8";
         }
 
         private void btn9_Click(object sender, EventArgs e)
         {
+            tmpAnswerCheck();
             inputBox.Text += "9";
         }
 
         private void btn0_Click(object sender, EventArgs e)
         {
+            tmpAnswerCheck();
             inputBox.Text += "0";
         }
 
         private void btnPoint_Click(object sender, EventArgs e)
         {
+            tmpAnswerCheck();
+            // need to add check number is here before adding point
             inputBox.Text += ".";
         }
 
         // Equals button
         private void btnEquals_Click(object sender, EventArgs e)
         {
-            preCalc(lastPressed);
-            inputBox.Text = answer.ToString(); // temp
+            equalsPressed = true;
+            preCalc(calcOperator);
+            //2.equals pressed, repeat last
+            // check answer is not empty, check operator
+            // repeat calculation
+            /*
+            if (numSecond == 0) // if no answer yet, calculate
+            {
+                equalsPressed = true;
+                preCalc(calcOperator);
+            }
+            else if (answer != 0 && equalsPressed)// if already answer, repeat last calculation
+            {
+                // check operator
+                double tmpNumFirst = answer;
+                if (calcOperator == "+") answer = tmpNumFirst + numSecond;
+                if (calcOperator == "-") answer = tmpNumFirst - numSecond;
+                if (calcOperator == "/") answer = tmpNumFirst / numSecond;
+                if (calcOperator == "*") answer = tmpNumFirst * numSecond;
+                
+                // e.g. 1 + 2 = 3
+                //fullCalculationsBox.Text += tmpNumFirst + calcOperatorSpace + numSecond + " = " + answer + "\n";
+                calculationBox.Text = tmpNumFirst.ToString() + calcOperatorSpace + numSecond.ToString() + " =";
+                inputBox.Text = answer.ToString(); // temp
+                fullCalculationsBox.Text += calculationBox.Text + answer + "\n";
+                // after equals pressed, start again
+                reset();
+                equalsPressed = false;
+                //answer += numSecond;
+                //answer = numFirst;
+                // after this, if + pressed, do nothing 
+                // when is equalsPressed = false?;
+            }*/
         }
+
+        
 
         // operators
         private void btnPlus_Click(object sender, EventArgs e)
@@ -233,9 +404,11 @@ namespace T2WindowsFormsApp
         private void btnInvert_Click(object sender, EventArgs e)
         {
             // get input value, set value to *-1 (reverse), display value
-            double tmpNum =  double.Parse(inputBox.Text);
-            tmpNum = tmpNum * -1; // 
-            inputBox.Text = tmpNum.ToString();
+            if(inputBox.Text != "") { 
+                double tmpNum =  double.Parse(inputBox.Text);
+                tmpNum = tmpNum * -1; // 
+                inputBox.Text = tmpNum.ToString();
+            }
         }
 
 
