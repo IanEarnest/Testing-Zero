@@ -21,11 +21,77 @@ namespace T2WindowsFormsApp
             // shrink hide
         }
 
-        //TODO
+        // This was made following the tutorial:
         // Calc https://www.homeandlearn.co.uk/csharp/csharp_s2p18.html
+        //TODO
         // Menus? https://www.homeandlearn.co.uk/csharp/csharp_s4p1.html
-
+        // After = press number to reset
         //string input;
+
+
+        // variables
+        double numFirst = 0; // first input
+        double numSecond = 0; // last input 
+        double answer = 0; // answer
+        string lastPressed = ""; // operator
+
+        // answer in box
+
+        //next number clears box
+        //numFirst = 0;
+        // after equals, if a number is pressed, reset everything
+        // after equals, if equals pressed, repeats last action (+)
+        //                          answer += numSecond;
+        //                          // numSecond = numSecond - CHANGE ELSE ABOVE?
+        //                          // answer = numFirst
+        //                          calculationBox.Text = answer.toString() + " + " + numSecond.toString()
+        // after equals, if + pressed,
+        //                          calculationBox.Text = answer.toString() + " + "
+        //                          + pressed again does nothing
+
+        // Most logic in here
+        private void preCalc(string calcOperator)
+        {
+            // if + pressed (second time?), show answer until something pressed?
+            //inputBox.Text = answer.ToString();
+            //tmpAnswerInInput = true
+
+            if (numFirst == 0) // if first input, set num1
+            {
+                numFirst = double.Parse(inputBox.Text);
+                calculationBox.Text += numFirst + calcOperator;
+            }
+            else if (numSecond == 0)
+            {
+                numSecond = double.Parse(inputBox.Text);
+                calculationBox.Text += numSecond + calcOperator;
+            }
+            else // if both first and second numbers set
+            {
+                if (calcOperator == "+") numFirst = numFirst + numSecond;
+                if (calcOperator == "-") numFirst = numFirst - numSecond;
+                if (calcOperator == "/") numFirst = numFirst / numSecond;
+                if (calcOperator == "*") numFirst = numFirst * numSecond;
+                //numFirst = 0;
+                numSecond = double.Parse(inputBox.Text);
+                calculationBox.Text += numSecond + calcOperator;
+            }
+
+
+            string calcOperatorSpace = " " + calcOperator + " "; // this means " + "
+            if (calcOperator == "+")
+            {
+                answer = numFirst + numSecond;
+            }
+            if (calcOperator == "-") answer = numFirst - numSecond;
+            if (calcOperator == "/") answer = numFirst / numSecond;
+            if (calcOperator == "*") answer = numFirst * numSecond;
+
+            lastPressed = calcOperator;
+            fullCalculationsBox.Text += numFirst + calcOperatorSpace + numSecond + " = " + answer + "\n";
+            inputBox.Text = "";
+        }
+
 
         private void tmpAnswerCheck()
         {
@@ -35,6 +101,43 @@ namespace T2WindowsFormsApp
             // tmpAnswerInInput = false;
             //}
         }
+
+
+
+
+
+
+
+
+        // clear buttons
+        // go back one character
+        private void btnBackspace_Click(object sender, EventArgs e)
+        {
+            String tmpInput = inputBox.Text;
+            String newString = "";
+            //answerBox.Text.Length = answerBox.Text.Length - 1;
+            // Only remove last letter if the letter exists (otherwise would have error)
+            if (tmpInput.Length > 0)
+            {
+                newString = tmpInput.Substring(0, (tmpInput.Length - 1));
+            }
+            inputBox.Text = newString;
+        }
+        private void btnClearEntry_Click(object sender, EventArgs e)
+        {
+            inputBox.Text = ""; //textBox1.Clear();
+        }
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            numFirst = 0;
+            numSecond = 0;
+            answer = 0;
+            inputBox.Text = "";
+            calculationBox.Text = "";
+        }
+
+
+        // buttons 1-9
         private void btn1_Click(object sender, EventArgs e)
         {
             //tmpAnswerCheck()
@@ -46,6 +149,7 @@ namespace T2WindowsFormsApp
             //MessageBox.Show("Hi", "Title", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
         }
 
+        // buttons
         private void btn2_Click(object sender, EventArgs e)
         {
             inputBox.Text += "2";
@@ -96,126 +200,14 @@ namespace T2WindowsFormsApp
             inputBox.Text += ".";
         }
 
-        private void btnBackspace_Click(object sender, EventArgs e)
-        {
-            String tmpInput = inputBox.Text;
-            String newString = "";
-            //answerBox.Text.Length = answerBox.Text.Length - 1;
-            // Only remove last letter if the letter exists (otherwise would have error)
-            if (tmpInput.Length > 0) {
-                newString = tmpInput.Substring(0, (tmpInput.Length - 1));
-            }
-            inputBox.Text = newString;
-        }
-        private void btnClearEntry_Click(object sender, EventArgs e)
-        {
-            inputBox.Text = ""; //textBox1.Clear();
-        }
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            numFirst = 0;
-            numSecond = 0;
-            answer = 0;
-            inputBox.Text = "";
-            calculationBox.Text = "";
-        }
-        private void btnClearRich_Click(object sender, EventArgs e)
-        {
-            fullCalculationsBox.Text = "";
-        }
-
-        double numFirst = 0; // 
-        double numSecond = 0; // 
-        double answer = 0; // answer?
-        string lastPressed = "";
+        // Equals button
         private void btnEquals_Click(object sender, EventArgs e)
         {
-            //num2 = num1 + double.Parse(inputBox.Text);
-
-            //inputBox.Text = num2.ToString(); // show answer
-
-            //num1 = 0;
-
-            // check second number is not used
-            // if used add together, get input, set as second number
-            // else get input, set as second number
-            // add both numbers
-            /*
-            if (numSecond == 0)
-            {
-                numSecond = double.Parse(inputBox.Text);
-                calculationBox.Text += numSecond + "+";
-            }
-            else // if both first and second numbers set, add both into first and input into second
-            {
-                numFirst = numFirst + numSecond;
-                numSecond = double.Parse(inputBox.Text);
-                calculationBox.Text += numSecond + "+";
-            }
-            answer = numFirst + numSecond;
-            */
             preCalc(lastPressed);
-            //calculationBox.Text += numSecond.ToString(); //"("+num2+")";
-            inputBox.Text = answer.ToString(); //answer in box
-            //next number clears box
-            //numFirst = 0;
-            // after equals, if a number is pressed, reset everything
-            // after equals, if equals pressed, repeats last action (+)
-            //                          answer += numSecond;
-            //                          // numSecond = numSecond - CHANGE ELSE ABOVE?
-            //                          // answer = numFirst
-            //                          calculationBox.Text = answer.toString() + " + " + numSecond.toString()
-            // after equals, if + pressed,
-            //                          calculationBox.Text = answer.toString() + " + "
-            //                          + pressed again does nothing
+            inputBox.Text = answer.ToString(); // temp
         }
 
-        private void preCalc(string calcOperator)
-        {
-            // if + pressed (second time?), show answer until something pressed?
-            //inputBox.Text = answer.ToString();
-            //tmpAnswerInInput = true
-
-            if (numFirst == 0) // if first input, set num1
-            {
-                numFirst = double.Parse(inputBox.Text);
-                calculationBox.Text += numFirst + calcOperator;
-            }
-            else if (numSecond == 0)
-            {
-                numSecond = double.Parse(inputBox.Text);
-                calculationBox.Text += numSecond + calcOperator;
-            }
-            else // if both first and second numbers set
-            {
-                if (calcOperator == "+") numFirst = numFirst + numSecond;
-                if (calcOperator == "-") numFirst = numFirst - numSecond;
-                if (calcOperator == "/") numFirst = numFirst / numSecond;
-                if (calcOperator == "*") numFirst = numFirst * numSecond;
-                //numFirst = 0;
-                numSecond = double.Parse(inputBox.Text);
-                calculationBox.Text += numSecond + calcOperator;
-            }
-
-
-            string calcOperatorSpace = " " + calcOperator + " "; // this means " + "
-            if (calcOperator == "+")
-            {
-                answer = numFirst + numSecond;
-            }
-            if (calcOperator == "-") answer = numFirst - numSecond;
-            if (calcOperator == "/") answer = numFirst / numSecond;
-            if (calcOperator == "*") answer = numFirst * numSecond;
-
-            lastPressed = calcOperator;
-            fullCalculationsBox.Text += numFirst + calcOperatorSpace + numSecond + " = " + answer + "\n";
-            inputBox.Text = "";
-        }
-
-        // get box number (double)
-        // add to second number (if any)
-        // 
-        //String tmpAnswer = answerBox.Text;
+        // operators
         private void btnPlus_Click(object sender, EventArgs e)
         {
             preCalc("+");
@@ -236,27 +228,32 @@ namespace T2WindowsFormsApp
             preCalc("/");
         }
 
+        
+        // make positive number negative and vice versa (1 = -1 or -1 = 1)
         private void btnInvert_Click(object sender, EventArgs e)
         {
+            // get input value, set value to *-1 (reverse), display value
             double tmpNum =  double.Parse(inputBox.Text);
-            tmpNum = tmpNum * -1;
+            tmpNum = tmpNum * -1; // 
             inputBox.Text = tmpNum.ToString();
-            // number = minus (true)?
         }
 
+
+        // rich text box (full calculations box) buttons
+        // btn clear, btn extend, btn shrink
         private void btnExtend_Click(object sender, EventArgs e)
         {
             fullCalculationsBox.Height = 232; //285
-            //button18.Visible = false; //shrink
-            //button19.Visible = true;
-            // fullcalculationsbox size = 100, 311
-            // hide btnShrink
-            // show btnExtend
         }
 
         private void btnShrink_Click(object sender, EventArgs e)
         {
             fullCalculationsBox.Height = 56;
+        }
+
+        private void btnClearRich_Click(object sender, EventArgs e)
+        {
+            fullCalculationsBox.Text = "";
         }
     }
 }
