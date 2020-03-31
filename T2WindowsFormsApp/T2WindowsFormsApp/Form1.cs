@@ -73,7 +73,7 @@ namespace T2WindowsFormsApp
             if (numFirst == 0) // if first input, set num1
             {
                 numFirst = double.Parse(inputBox.Text);
-                calculationBox.Text += numFirst + calcOp; // e.g. 1 +
+                calculationBox.Text += numFirst + calcOperatorSpace; // e.g. 1 +
             }
             else if (numSecond == 0) // if second input, set num2
             {
@@ -81,14 +81,17 @@ namespace T2WindowsFormsApp
                 if (!equalsPressed)
                 {
                     numSecond = double.Parse(inputBox.Text);
-                    calculationBox.Text += numSecond + calcOp; // e.g. 1 + 1
+                    calculationBox.Text += numSecond + calcOperatorSpace; // e.g. 1 + 1
                                                                // on second + pressed, display temp answer
                                                                // same for =??
                     calculate(); // e.g. answer = numFirst + numSecond;
 
                     inputBox.Text = answer.ToString();
                     tmpAnswerInInput = true;
-                    fullCalculationsBox.Text += numSecond + calcOp;
+
+                    // instead of displaying "+ num"
+                    //try displaying the full calculationBox.text then new line
+                    //fullCalculationsBox.Text += numSecond + calcOperatorSpace;
                     // carry on calculating?
                 }
                 else // e.g. 1 + 1 =
@@ -189,10 +192,15 @@ namespace T2WindowsFormsApp
                     
                     inputBox.Text = answer.ToString();
                     tmpAnswerInInput = true;
-                    calculationBox.Text += numSecond + calcOp;
-                    fullCalculationsBox.Text += numSecond + calcOp;
+                    calculationBox.Text += numSecond + calcOperatorSpace;
 
-                    
+
+                    // instead of displaying "+ num"
+                    //try displaying the full calculationBox.text then new line
+                    //fullCalculationsBox.Text += numSecond + calcOperatorSpace;//+ " " + calcOp + " ";
+
+
+
                 }
             }
 

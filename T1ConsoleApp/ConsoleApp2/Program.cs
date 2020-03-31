@@ -11,6 +11,8 @@ namespace T1ConsoleApp
 {
     class Program
     {
+        
+        
 
         static string input = ""; // user input
         static bool validInput = true; // text filter
@@ -21,6 +23,24 @@ namespace T1ConsoleApp
         // restart program
         static void Main() // private static void Main(string[] args)
         {
+
+            // Unit test example 1
+            //Calculator calc = new Calculator();
+            var calculator = new Calculator();
+
+            int result = calculator.Add(5, 6);
+
+            if (result != 11)
+                throw new InvalidOperationException();
+            // end of test
+            
+            /*
+            var ba = new BankAccount("A",1);
+            ba.Credit(5.77);
+            ba.Debit(11.22);
+            Console.WriteLine("Current balance is ${0}", ba.Balance);
+            */
+
             // Start of program
             // User instructions, read user input
             Console.WriteLine("Hello World! - Console Calculator App");
