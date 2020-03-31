@@ -4,7 +4,7 @@ using System.Text;
 
 namespace T1ConsoleApp
 {
-    public class Calculator
+    public class Calc4Testing
     {
         /// <summary>
         /// unit test example 1

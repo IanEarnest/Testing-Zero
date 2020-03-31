@@ -3,17 +3,21 @@
 // Program ideas
 // 1. Calculator // https://docs.microsoft.com/en-us/visualstudio/get-started/csharp/tutorial-console?view=vs-2019
 // TODO - seperate into functions/ sperate files?, change to public/ not static?
+// TODO - 
 // 2. Another app??? - try out Visual C# - https://www.homeandlearn.co.uk/csharp/csharp_s1p8.html
 //ideas - https://www.javatpoint.com/csharp-programs
 //- https://www.javatpoint.com/csharp-program-to-convert-number-in-characters
 // next?
 namespace T1ConsoleApp
 {
-    class Program
-    {
-        
-        
 
+    // Overview
+    /* Main()           = Read user input, check for letters, perform calculation, restart
+     * Calculate()      = take user input and operation then use FindNumbers and calculate then display result
+     * FindNumbers()    = iterate through user input, return both first and second number
+     */
+    class CalculatorBasic
+    {
         static string input = ""; // user input
         static bool validInput = true; // text filter
 
@@ -23,24 +27,6 @@ namespace T1ConsoleApp
         // restart program
         static void Main() // private static void Main(string[] args)
         {
-
-            // Unit test example 1
-            //Calculator calc = new Calculator();
-            var calculator = new Calculator();
-
-            int result = calculator.Add(5, 6);
-
-            if (result != 11)
-                throw new InvalidOperationException();
-            // end of test
-            
-            /*
-            var ba = new BankAccount("A",1);
-            ba.Credit(5.77);
-            ba.Debit(11.22);
-            Console.WriteLine("Current balance is ${0}", ba.Balance);
-            */
-
             // Start of program
             // User instructions, read user input
             Console.WriteLine("Hello World! - Console Calculator App");
@@ -64,7 +50,7 @@ namespace T1ConsoleApp
                     Console.WriteLine("");
                     validInput = false;
                     //return;
-                    Program.Main();
+                    CalculatorBasic.Main();
                 }
             }
             //Console.WriteLine(""); // space between numbers and "Add" or "Sub" // Debug
@@ -84,14 +70,14 @@ namespace T1ConsoleApp
             }
 
             // after addition or subtraction finished
-            Program.Main(); // Restart program
+            CalculatorBasic.Main(); // Restart program
         }
 
+        // Get numbers from input
+        // operation
+        // display result
         public static void Calculate(string input, char op)
         {
-            // Get numbers from input
-            // operation
-            // display result
             int[] returnVal = new int[] { 0, 0 };
             double result = 0; // double allows division
             returnVal = FindNumbers(input);
@@ -107,9 +93,9 @@ namespace T1ConsoleApp
             Console.WriteLine("");
         }
 
+        // Find first and second numbers
         public static int[] FindNumbers(string uInput)
         {
-            // Find start/ end of first number
             int num1 = 0;
             int num2 = 0;
             string n1 = ""; // num1 in String
