@@ -1,8 +1,8 @@
 ﻿using System;
 
-// Program ideas - hello
+// Program ideas
 // 1. Calculator // https://docs.microsoft.com/en-us/visualstudio/get-started/csharp/tutorial-console?view=vs-2019
-// TODO - seperate into functions/ sperate files?
+// TODO - seperate into functions/ sperate files?, change to public/ not static?
 // 2. Another app??? - try out Visual C# - https://www.homeandlearn.co.uk/csharp/csharp_s1p8.html
 //ideas - https://www.javatpoint.com/csharp-programs
 //- https://www.javatpoint.com/csharp-program-to-convert-number-in-characters
@@ -11,24 +11,32 @@ namespace T1ConsoleApp
 {
     class Program
     {
+
+        static string input = ""; // user input
+        static bool validInput = true; // text filter
+
+        // Read user input
+        // check for letters (invalid)
+        // perform calculation (+ or -)
+        // restart program
         static void Main() // private static void Main(string[] args)
         {
-            string input = ""; // user input
-            bool validInput = true;
-
-
-            Console.WriteLine("Enter calculation... e.g. 1+1"); // user inputs numbers + arithmatic (+, -)
+            // Start of program
+            // User instructions, read user input
+            Console.WriteLine("Hello World! - Console Calculator App");
+            Console.WriteLine("Enter calculation and press Enter... e.g. 1+1"); // user inputs numbers + arithmatic (+, -)
             input = Console.ReadLine(); // read user input
 
-            // filter to find any letters (don't belong)
-            // Loop prints all inputs, false validInput if letter is found
 
+            // Error checking
+            // Filter to find any letters (don't belong)
+            // Loop prints all inputs, if letter is found then validInput = false 
             //Console.Write("Length = " + input.Length + " - "); // Debug
-            for (int i = 0; i < input.Length; i++) // i = character
+            for (int i = 0; i < input.Length; i++) // i = character, loop through until last letter of input
             {
                 //Console.Write("i" + i + "=" + input[i] + " "); // Debug
-
-                // if letter and not number or +/-
+                // Check each character
+                // If letter and not number or +/-, restart program
                 if (Char.IsLetter(input[i]))
                 {
                     //Console.WriteLine(""); // space between
@@ -41,88 +49,90 @@ namespace T1ConsoleApp
             }
             //Console.WriteLine(""); // space between numbers and "Add" or "Sub" // Debug
 
-
+            // Outside of error checking (loop though letters) 
+            // Once either - program restarted due to letter
+            //            - or valid input, then carry on
+            // if not letter (valid input = true)
+            // check for + or - (and do calculation)
             if (validInput)
             {
-                if (input.Contains("+"))
-                {
-                    Add(input); // Addition
-                }
-                else if (input.Contains("-"))
-                {
-                    Sub(input); // Subtraction
-                }
+                // do calculation of the Operation found
+                if (input.Contains("+"))      Calculate(input, '+'); // Addition
+                else if (input.Contains("-")) Calculate(input, '-'); // Subtraction
+                else if (input.Contains("/")) Calculate(input, '/'); // Division
+                else if (input.Contains("*")) Calculate(input, '*'); // Multiplication
             }
-            /*
-            Console.WriteLine("Hello World! - Console Calculator App");
-            Console.WriteLine("Enter number: ");
-            Console.ReadLine();
-            */
 
+            // after addition or subtraction finished
             Program.Main(); // Restart program
         }
 
-        public static void Add(string input)
+        public static void Calculate(string input, char op)
         {
+            // Get numbers from input
+            // operation
+            // display result
             int[] returnVal = new int[] { 0, 0 };
+            double result = 0; // double allows division
             returnVal = FindNumbers(input);
-            int result = returnVal[0] + returnVal[1];
+            
+            // check for each operator
+            // calculate
+            if (op == '+') result = returnVal[0] + returnVal[1];
+            else if (op == '-') result = returnVal[0] - returnVal[1];
+            else if (op == '/') result = (double)returnVal[0] / (double)returnVal[1]; // // double allows division
+            else if (op == '*') result = returnVal[0] * returnVal[1];
+
             Console.WriteLine("= " + result);
             Console.WriteLine("");
         }
 
-
-        public static void Sub(string input)
-        {
-            int[] returnVal = new int[] { 0, 0 };
-            returnVal = FindNumbers(input);
-            int result = returnVal[0] - returnVal[1];
-            Console.WriteLine("= " + result);
-            Console.WriteLine("");
-        }
-
-        public static int[] FindNumbers(string input)
+        public static int[] FindNumbers(string uInput)
         {
             // Find start/ end of first number
             int num1 = 0;
             int num2 = 0;
-            int result = 0;
-            int symIndex = 0;
+            string n1 = ""; // num1 in String
+            string n2 = ""; // num2 in String
+            int symIndex = 0; // symbol position in the user input String
 
-            for (int i = 0; i < input.Length; i++) // i = number
+
+            // loop through characters from input
+            for (int i = 0; i < uInput.Length; i++) // i = number
             {
-                if (input[i] == '+' || input[i] == '-') // if symbol, stop
+                // find + or - symbol
+                if (uInput[i] == '+' || uInput[i] == '-' || uInput[i] == '/' || uInput[i] == '*') // if symbol, stop
                 {
-
                     symIndex = i;
                     //Console.WriteLine("symIndex= " + symIndex); // Debug
-                    //input[0] until input[i-1] is first number
-                    //input[i+1] util input.length = second number
 
-                    string n1 = "";
+                    // set first number
+                    //first number = input[0] until input[i-1]
                     for (int j = 0; j < i; j++) // until j hits i (numbers hit symbol)
                     {
-                        n1 += Char.GetNumericValue(input[j]); //(int)Char.GetNumericValue(input[j]);
+                        // add to String each character this is a number 
+                        //before the symbol
+                        n1 += Char.GetNumericValue(uInput[j]); //(int)Char.GetNumericValue(input[j]);
                         //Console.WriteLine("j = " + input[j]); // Debug
                     }
-                    string n2 = "";
-                    for (int k = i + 1; k < input.Length; k++) // until end of line
+
+                    // set second number
+                    //second number = input[i+1] util input.length
+                    // add to String each character this is a number 
+                    //after the symbol
+                    for (int k = i + 1; k < uInput.Length; k++) // until end of line (user input)
                     {
-                        n2 += Char.GetNumericValue(input[k]);
-                        //Console.WriteLine("k = " + input[k]); // Debug
+                        n2 += Char.GetNumericValue(uInput[k]);
                     }
+
+                    // Set integer to the String values
                     num1 = Int32.Parse(n1);
-                    num2 = Int32.Parse(n2);
+                    num2 = Int32.Parse(n2); // crashes when only one number is submitted
                 }
             }
 
-
-
-            //result = num1 + num2;
-            //Console.WriteLine("(n1) " + num1 + " + (n2) " + num2 +  " = " + result); // Debug
-            //Console.WriteLine("= " + result);
-            //Console.WriteLine("");
-            //Console.ReadLine();
+            // after num1 and num2 set to numbers
+            //return numbers as integer array
             int[] returnVal = new int[] { num1, num2 };
             return returnVal;
         }
