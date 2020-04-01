@@ -8,19 +8,7 @@ namespace UnitTestProject1
     [TestClass]
     public class BankTests
     {
-        // Test calc app with the Using
-        [TestMethod]
-        public void Something()
-        {
-            // Arrange
-            // Act
-            // Assert
-            //var calc = new Calc4Testing();
-            //int result = calc.Add(4, 3);
-            //Assert.AreEqual(7, result);
-        }
-
-        // Test calc app without the Using set above
+        // Testing - credit a new account
         [TestMethod]
         public void Credit()
         {
@@ -38,8 +26,10 @@ namespace UnitTestProject1
             }
         }
 
+
+        // Testing - debit account, check the remaining is correct 
         [TestMethod]
-        public void Debit_WithValidAmount_UpdatesBalance()
+        public void Debit_Valid_RemainingCheck()
         {
             // Arrange
             double beginningBalance = 11.99;
@@ -51,25 +41,27 @@ namespace UnitTestProject1
             account.Debit(debitAmount);
 
             // Assert
-            double actual = account.Balance;
+            double actual = account.Balance; // expected = 7.44
             Assert.AreEqual(expected, actual, 0.001, "Account not debited correctly");
             // this uncovers a bug with BankAcc4Testing - m_balance -= amount;
         }
 
+        // Testing - debit account, less than 0 - Throw Argument
         [TestMethod]
-        public void Debit_WhenAmountIsLessThanZero_ShouldThrowArgumentOutOfRange()
+        public void Debit_LessThan0_ShouldThrowArgumentOutOfRange()
         {
             // Arrange
             double beginningBalance = 11.99;
             double debitAmount = -100.00;
             BankAcc4Testing account = new BankAcc4Testing("Mr. Bryan Walton", beginningBalance);
 
-            // Act and assert
+            // Shorthand/ lambda expression?
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(debitAmount));
         }
 
+        // Testing - debit account, balance too low to debit - Throw Argument
         [TestMethod]
-        public void Debit_WhenAmountIsMoreThanBalance_ShouldThrowArgumentOutOfRange2()
+        public void Debit_BalanceTooLow_ShouldThrowArgumentOutOfRange()
         {
             // Arrange
             double beginningBalance = 11.99;
