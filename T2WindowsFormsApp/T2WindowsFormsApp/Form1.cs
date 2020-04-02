@@ -32,7 +32,11 @@ namespace T2WindowsFormsApp
         // 
         //Future
         // btnPoint_Click add check for number before
-
+        /*1. answer in box (clears after press)
+        * 2. equals pressed, repeat last
+        * 3. plus pressed after equals does nothing (+ in calc box)
+        * after + pressed, leave number (until number pressed)
+         */
 
 
         // variables
@@ -117,7 +121,7 @@ namespace T2WindowsFormsApp
                 if (calcOperator == "/") answer = tmpNumFirst / numSecond;
                 if (calcOperator == "*") answer = tmpNumFirst * numSecond;
                 */
-                numFirst = answer;
+        numFirst = answer;
                 calculate();
                 // 1 + 2 + 3 = 6 changed into
                 // 3 + 3

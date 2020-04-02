@@ -29,8 +29,24 @@ namespace T1ConsoleApp
         {
             get { return m_balance; }
         }
-
+        public const string Debit_AccTooLow_M = "Debit amount exceeds balance";
+        public const string Debit_IncorrectAmount_M = "Debit amount is less than zero";
         public void Debit(double amount)
+        {
+            if (amount > m_balance)
+            {
+                throw new ArgumentOutOfRangeException("amount", amount, Debit_AccTooLow_M);
+            }
+
+            if (amount < 0)
+            {
+                throw new ArgumentOutOfRangeException("amount", amount, Debit_IncorrectAmount_M);
+            }
+
+            m_balance += amount; // intentionally incorrect code
+        }
+        
+        public void Debit_Fixed(double amount)
         {
             if (amount > m_balance)
             {
@@ -42,7 +58,7 @@ namespace T1ConsoleApp
                 throw new ArgumentOutOfRangeException("amount");
             }
 
-            m_balance += amount; // intentionally incorrect code
+            m_balance -= amount;
         }
 
         public void Credit(double amount)
