@@ -315,7 +315,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             catch (System.ArgumentOutOfRangeException e)
             {
                 // Assert
-                StringAssert.Contains(e.Message, BankAcc4Testing.Debit_AccTooLow_M);//BankAcc4Testing.DebitAmountExceedsBalanceMessage);
+                StringAssert.Contains(e.Message, BankAcc4Testing.Debit_AccTooLow_M);
             }
         }
         [TestMethod]
@@ -337,10 +337,28 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             catch (System.ArgumentOutOfRangeException e)
             {
                 //throw new ArgumentOutOfRangeException("amount", amount, Debit_IncorrectAmount_M);
+                StringAssert.Contains(e.Message, BankAcc4Testing.Debit_AccTooLow_M);
+                return; // without return, fails due to carrying on to Assert.Fail
+            }
+            // When no exception is thrown
+            Assert.Fail("Expected exception, but exception was not thrown.");
+        }
+        [TestMethod]
+        public void TUTORIAL_Debit_IncorrectAmount()
+        {
+            double debitAmount = -5;
+            double beginningBalance = 100;
+            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", beginningBalance);
+
+            try
+            {
+                account.Debit(debitAmount);
+            }
+            catch (System.ArgumentOutOfRangeException e)
+            {
                 StringAssert.Contains(e.Message, BankAcc4Testing.Debit_IncorrectAmount_M);
                 return;
             }
-            // When no fail is thrown
             Assert.Fail("The expected exception was not thrown.");
         }
     }
