@@ -15,7 +15,7 @@ namespace UnitTestProject1
             // Arrange
             // Act
             // Assert
-            var calc = new Calc4Testing();
+            var calc = new Calc_Testing();
             int result = calc.Add(4, 3);
             Assert.AreEqual(7, result);
         }
@@ -24,7 +24,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void WithoutUsing()
         {
-            var calc2 = new T1ConsoleApp.Calc4Testing();
+            var calc2 = new T1ConsoleApp.Calc_Testing();
             int result = calc2.Add(4, 3);
             Assert.AreEqual(7, result);
         }

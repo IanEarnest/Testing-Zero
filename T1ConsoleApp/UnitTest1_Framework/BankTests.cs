@@ -55,7 +55,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             string name = "Mr. Steven Smith";
             string expected = name;
             string actual = "";
-            BankAcc4Testing account = new BankAcc4Testing(name, 0);
+            BankAcc_Testing account = new BankAcc_Testing(name, 0);
 
             actual = account.CustomerName; // expected = Mr. Steven Smith
             Assert.AreEqual(expected, actual, true, "Account named INCORRECTLY");
@@ -66,7 +66,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             double amount = 100.01;
             double expected = amount;
             double actual = 0.0;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", amount);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", amount);
 
             actual = account.Balance; // expected = 100.01
             Assert.AreEqual(expected, actual, 0.001, "Account balance INCORRECT");
@@ -77,7 +77,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             double amount = 100.01;
             double expected = amount;
             double actual = 0.0;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", amount);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", amount);
 
             actual = account.Balance; // expected = 100.01
             Assert.AreEqual(expected, actual, 0.001, "Account balance INCORRECT");
@@ -87,7 +87,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             double amount2 = 100000000.01;
             double expected2 = amount2;
             double actual2 = 0.0;
-            BankAcc4Testing account2 = new BankAcc4Testing("Mr. Steven Smith", amount2);
+            BankAcc_Testing account2 = new BankAcc_Testing("Mr. Steven Smith", amount2);
 
             actual2 = account2.Balance; // expected = 100000000.01
             Assert.AreEqual(expected2, actual2, 0.001, "Account balance INCORRECT");
@@ -98,7 +98,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             double amount = 100000000.01;
             double expected = amount;
             double actual = 0.0;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", amount);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", amount);
 
             actual = account.Balance; // expected = 100000000.01
             Assert.AreEqual(expected, actual, 0.001, "Account balance INCORRECT");
@@ -109,7 +109,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             double amount = -100.01;
             double expected = amount;
             double actual = 0.0;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", amount);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", amount);
 
             actual = account.Balance; // expected = -100.01
             Assert.AreEqual(expected, actual, 0.001, "Account balance INCORRECT"); // should fail
@@ -118,7 +118,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             double amount2 = 0.0;
             double expected2 = amount2;
             //double actual2 = 0.0;
-            BankAcc4Testing account2 = new BankAcc4Testing("Mr. Steven Smith", amount2);
+            BankAcc_Testing account2 = new BankAcc_Testing("Mr. Steven Smith", amount2);
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(amount));
 
             //actual2 = account2.Balance; // expected = 0.0
@@ -129,7 +129,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
         {
             double amount = -101.01; // negative
             double balance = 100;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", balance);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", balance);
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(amount));
         }
 
@@ -139,7 +139,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
         {
             double amount = 0; // zero
             double balance = 100;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", balance);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", balance);
 
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(amount)); 
         }
@@ -148,7 +148,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
         {
             double amount = 101.01; // more than in account (balance)
             double balance = 100;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", balance);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", balance);
 
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(amount));
             // Catch ArgumentOutOfRangeException
@@ -161,7 +161,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             double beginningBalance = 100.10;
             double debitAmount = 10.01;
             double expected = 90.09;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", beginningBalance);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", beginningBalance);
 
             // Act
             account.Debit(debitAmount);
@@ -176,7 +176,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
         {
             double amount = -101.01; // negative
             double balance = 100;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", balance);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", balance);
 
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(amount));
         }
@@ -185,7 +185,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
         {
             double amount = 0; // negative
             double balance = 100;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", balance);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", balance);
 
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit_Fixed(amount));
         }
@@ -194,7 +194,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
         {
             double amount = 101.01; // more than in account (balance)
             double balance = 100;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", balance);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", balance);
 
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit_Fixed(amount));
         }
@@ -204,7 +204,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             double beginningBalance = 100.10;
             double debitAmount = 10.01;
             double expected = 90.09;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", beginningBalance);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", beginningBalance);
 
             account.Debit_Fixed(debitAmount);
 
@@ -216,7 +216,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
         {
             double amount = -10.01;
             double expected = amount;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", 0);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", 0);
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Credit(amount));
         }
 
@@ -226,7 +226,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
         {
             double amount = 0;
             double expected = amount;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", 0);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", 0);
 
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Credit(amount));
         }
@@ -235,7 +235,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
         {
             double amount = 10.01;
             double expected = amount;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", 0);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", 0);
 
             account.Credit(amount);
 
@@ -245,9 +245,9 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
         [TestMethod]
         public void BankMain() // BankMain - just run and check print // should pass
         {
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", 0);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", 0);
             //account.BankMain();
-            BankAcc4Testing.BankMain();
+            BankAcc_Testing.BankMain();
             // Writeline check?
 
             /*
@@ -274,7 +274,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             double beginningBalance = 11.99;
             double debitAmount = 4.55;
             double expected = 7.44;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Bryan Walton", beginningBalance);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Bryan Walton", beginningBalance);
 
             // Act
             account.Debit(debitAmount);
@@ -292,7 +292,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             // Arrange
             double beginningBalance = 11.99;
             double debitAmount = -100.00;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Bryan Walton", beginningBalance);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Bryan Walton", beginningBalance);
 
             // Shorthand/ lambda expression?
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(debitAmount));
@@ -305,7 +305,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             // Arrange
             double beginningBalance = 11.99;
             double debitAmount = 20.0;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Bryan Walton", beginningBalance);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Bryan Walton", beginningBalance);
 
             // Act
             try
@@ -315,7 +315,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             catch (System.ArgumentOutOfRangeException e)
             {
                 // Assert
-                StringAssert.Contains(e.Message, BankAcc4Testing.Debit_AccTooLow_M);
+                StringAssert.Contains(e.Message, BankAcc_Testing.Debit_AccTooLow_M);
             }
         }
         [TestMethod]
@@ -323,7 +323,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
         {
             double debitAmount = 101.01; // more than in account (balance)
             double beginningBalance = 100;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", beginningBalance);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", beginningBalance);
 
             //Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(debitAmount));
             // Catch ArgumentOutOfRangeException
@@ -337,7 +337,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             catch (System.ArgumentOutOfRangeException e)
             {
                 //throw new ArgumentOutOfRangeException("amount", amount, Debit_IncorrectAmount_M);
-                StringAssert.Contains(e.Message, BankAcc4Testing.Debit_AccTooLow_M);
+                StringAssert.Contains(e.Message, BankAcc_Testing.Debit_AccTooLow_M);
                 return; // without return, fails due to carrying on to Assert.Fail
             }
             // When no exception is thrown
@@ -348,7 +348,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
         {
             double debitAmount = -5;
             double beginningBalance = 100;
-            BankAcc4Testing account = new BankAcc4Testing("Mr. Steven Smith", beginningBalance);
+            BankAcc_Testing account = new BankAcc_Testing("Mr. Steven Smith", beginningBalance);
 
             try
             {
@@ -356,7 +356,7 @@ DebitFixed_Zero     - Bug #4 Error, can Debit 0 in account
             }
             catch (System.ArgumentOutOfRangeException e)
             {
-                StringAssert.Contains(e.Message, BankAcc4Testing.Debit_IncorrectAmount_M);
+                StringAssert.Contains(e.Message, BankAcc_Testing.Debit_IncorrectAmount_M);
                 return;
             }
             Assert.Fail("The expected exception was not thrown.");

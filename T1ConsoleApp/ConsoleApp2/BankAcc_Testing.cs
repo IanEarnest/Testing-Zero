@@ -7,14 +7,14 @@ namespace T1ConsoleApp
     /// <summary>
     /// Bank account demo class.
     /// </summary>
-    public class BankAcc4Testing
+    public class BankAcc_Testing
     {
         private readonly string m_customerName;
         private double m_balance;
 
-        private BankAcc4Testing() { }
+        private BankAcc_Testing() { }
 
-        public BankAcc4Testing(string customerName, double balance)
+        public BankAcc_Testing(string customerName, double balance)
         {
             m_customerName = customerName;
             m_balance = balance;
@@ -73,7 +73,7 @@ namespace T1ConsoleApp
         
         public static void BankMain()
         {
-            BankAcc4Testing ba = new BankAcc4Testing("Mr. Bryan Walton", 11.99);
+            BankAcc_Testing ba = new BankAcc_Testing("Mr. Bryan Walton", 11.99);
 
             ba.Credit(5.77);
             ba.Debit(11.22);

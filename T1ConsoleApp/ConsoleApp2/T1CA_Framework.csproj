@@ -43,8 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BankAcc4Testing.cs" />
-    <Compile Include="Calc4Testing.cs" />
+    <Compile Include="BankAcc_Testing.cs" />
+    <Compile Include="Calc_Testing.cs" />
+    <Compile Include="MyMath_Testing.cs" />
     <Compile Include="CalculatorBasic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
