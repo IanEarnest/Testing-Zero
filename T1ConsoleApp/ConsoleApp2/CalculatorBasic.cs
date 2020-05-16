@@ -3,7 +3,7 @@
 // Program ideas
 // 1. Calculator // https://docs.microsoft.com/en-us/visualstudio/get-started/csharp/tutorial-console?view=vs-2019
 // TODO - seperate into functions/ sperate files?, change to public/ not static?
-// TODO - 
+
 // 2. Another app??? - try out Visual C# - https://www.homeandlearn.co.uk/csharp/csharp_s1p8.html
 //ideas - https://www.javatpoint.com/csharp-programs
 //- https://www.javatpoint.com/csharp-program-to-convert-number-in-characters
