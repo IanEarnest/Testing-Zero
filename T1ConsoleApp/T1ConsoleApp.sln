@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T1CA_Framework", "ConsoleApp2\T1CA_Framework.csproj", "{0980A882-CB86-4648-8D90-33D26DFC88A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T1CA_Framework", "T1CA_Framework\T1CA_Framework.csproj", "{0980A882-CB86-4648-8D90-33D26DFC88A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest1_Framework", "UnitTest1_Framework\UnitTest1_Framework.csproj", "{AFF98D82-AAB9-4B04-9AAD-559A005DD353}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T1CA_UnitTest1_Framework", "T1CA_UnitTest1_Framework\T1CA_UnitTest1_Framework.csproj", "{AFF98D82-AAB9-4B04-9AAD-559A005DD353}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

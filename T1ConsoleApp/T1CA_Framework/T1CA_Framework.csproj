@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0980A882-CB86-4648-8D90-33D26DFC88A2}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ConsoleApp2</RootNamespace>
-    <AssemblyName>ConsoleApp2</AssemblyName>
+    <RootNamespace>T1CA_Framework</RootNamespace>
+    <AssemblyName>T1CA_Framework</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
